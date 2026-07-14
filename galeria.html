@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Quicksand:wght@400;500;600;700&family=Yeseva+One&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    body { margin:0; background:#2A160D; }
+    a { color:#AE431E; text-decoration:none; }
+    a:hover { color:#E5A46C; }
+    @media (max-width: 900px) {
+      .gal-nav-inner { padding:12px 20px !important; }
+      .gal-nav-logo { font-size:26px !important; }
+      .gal-nav-back { font-size:13px !important; padding:9px 16px !important; }
+      .gal-header { padding:40px 20px 0 20px !important; }
+      .gal-title { font-size:32px !important; }
+      .gal-subtitle { font-size:16px !important; }
+      .gal-filters { flex-wrap:wrap !important; }
+      .gal-filter-btn { padding:10px 20px !important; font-size:14px !important; }
+      .gal-grid-wrap { padding:32px 20px 60px 20px !important; }
+      .gal-grid { grid-template-columns:repeat(2, 1fr) !important; gap:12px !important; }
+    }
+  </style>
+</helmet>
+
+<div style="min-height:100vh; background:linear-gradient(160deg,#3B2115,#2A160D); font-family:'Quicksand',sans-serif;">
+
+  <!-- NAV -->
+  <div class="gal-nav" style="background:rgba(36,19,9,0.9); position:sticky; top:0; z-index:5;">
+    <div class="gal-nav-inner" style="max-width:1260px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:26px 64px;">
+      <a href="index.html" class="gal-nav-logo" style="font-family:'Yeseva One',serif; font-size:36px; color:#F6ECDD;">Sollu</a>
+      <a href="index.html" class="gal-nav-back" style="border:1.5px solid #D8B896; color:#D8B896; padding:12px 26px; border-radius:30px; font-weight:700; font-size:15px;">&larr; Volver al inicio</a>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <div class="gal-header" style="padding:90px 90px 0 90px;">
+    <div style="max-width:1260px; margin:0 auto;">
+      <div style="font-family:'Caveat',cursive; font-size:30px; color:#E5A46C;">mi trabajo</div>
+      <div class="gal-title" style="font-family:'Fraunces',serif; font-weight:600; font-size:60px; color:#F6ECDD; margin-top:6px;">Galería completa</div>
+      <div class="gal-subtitle" style="font-size:20px; color:#D8B896; max-width:640px; margin-top:16px; line-height:1.6;">Flores y retratos de mascotas, siempre a color — cada pieza tatuada en mi estudio.</div>
+
+      <!-- FILTERS -->
+      <div class="gal-filters" style="display:flex; gap:14px; margin-top:44px;">
+        <div onClick="{{ setFilter_todos }}" class="gal-filter-btn" style="cursor:pointer; padding:13px 30px; border-radius:30px; font-weight:700; font-size:16px; background:{{ bgTodos }}; color:{{ colorTodos }}; border:1.5px solid #AE431E;">Todos</div>
+        <div onClick="{{ setFilter_flores }}" class="gal-filter-btn" style="cursor:pointer; padding:13px 30px; border-radius:30px; font-weight:700; font-size:16px; background:{{ bgFlores }}; color:{{ colorFlores }}; border:1.5px solid #AE431E;">Flores</div>
+        <div onClick="{{ setFilter_mascotas }}" class="gal-filter-btn" style="cursor:pointer; padding:13px 30px; border-radius:30px; font-weight:700; font-size:16px; background:{{ bgMascotas }}; color:{{ colorMascotas }}; border:1.5px solid #AE431E;">Mascotas</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GRID -->
+  <div class="gal-grid-wrap" style="padding:56px 90px 120px 90px;">
+    <div class="gal-grid" style="max-width:1260px; margin:0 auto; display:grid; grid-template-columns:repeat(4, 1fr); gap:26px;">
+      <sc-for list="{{ filteredGallery }}" as="g" hint-placeholder-count="12">
+        <div style="border-radius:16px; overflow:hidden; aspect-ratio:1; box-shadow:0 16px 32px rgba(0,0,0,0.3);">
+          <img src="{{ g.src }}" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { filter: 'todos' };
+
+  allGallery = [
+    { src: 'uploads/Screenshot 2026-07-08 225753-0a4411f2.png', cat: 'flores' },
+    { src: 'uploads/Screenshot 2026-07-13 104629-d112140f.png', cat: 'flores' },
+    { src: 'uploads/Screenshot 2026-07-13 135052.png', cat: 'flores' },
+    { src: 'uploads/Screenshot 2026-07-13 135311.png', cat: 'flores' },
+    { src: 'uploads/Screenshot 2026-07-13 104649-1a6d2235.png', cat: 'mascotas' },
+    { src: 'uploads/Screenshot 2026-07-13 104702-4e90aff7.png', cat: 'mascotas' },
+    { src: 'uploads/Screenshot 2026-07-13 104720-98788c9b.png', cat: 'mascotas' },
+    { src: 'uploads/Screenshot 2026-07-13 104744-b099976f.png', cat: 'mascotas' },
+    { src: 'uploads/Screenshot 2026-07-13 104815-291d117a.png', cat: 'mascotas' },
+    { src: 'uploads/Screenshot 2026-07-13 134938-0404d35b.png', cat: 'mascotas' },
+    { src: 'uploads/Screenshot 2026-07-13 135038.png', cat: 'mascotas' },
+    { src: 'uploads/Screenshot 2026-07-13 135110.png', cat: 'mascotas' },
+  ];
+
+  setFilter = (f) => this.setState({ filter: f });
+
+  renderVals() {
+    const filter = this.state.filter;
+    const filteredGallery = filter === 'todos' ? this.allGallery : this.allGallery.filter(g => g.cat === filter);
+    const activeBg = '#AE431E';
+    const inactiveBg = 'transparent';
+    const activeColor = '#F6ECDD';
+    const inactiveColor = '#D8B896';
+    return {
+      filteredGallery,
+      setFilter_todos: () => this.setFilter('todos'),
+      setFilter_flores: () => this.setFilter('flores'),
+      setFilter_mascotas: () => this.setFilter('mascotas'),
+      bgTodos: filter === 'todos' ? activeBg : inactiveBg,
+      colorTodos: filter === 'todos' ? activeColor : inactiveColor,
+      bgFlores: filter === 'flores' ? activeBg : inactiveBg,
+      colorFlores: filter === 'flores' ? activeColor : inactiveColor,
+      bgMascotas: filter === 'mascotas' ? activeBg : inactiveBg,
+      colorMascotas: filter === 'mascotas' ? activeColor : inactiveColor,
+    };
+  }
+}
+
+</script>
+</body>
+</html>
