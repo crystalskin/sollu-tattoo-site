@@ -26,6 +26,26 @@
       to { opacity:1; transform:translateY(0); }
     }
     .sollu-menu-panel { animation: sollu-menu-in 0.18s ease; }
+
+    .sollu-reveal {
+      opacity:0;
+      transform:translateY(20px);
+      transition:opacity 0.55s ease-out, transform 0.55s ease-out;
+    }
+    .sollu-reveal.sollu-revealed {
+      opacity:1;
+      transform:translateY(0);
+    }
+    .sollu-gallery-img { transition:transform 0.25s ease; }
+    @media (hover:hover) and (pointer:fine) {
+      .sollu-gallery-img:hover { transform:scale(1.04); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .sollu-reveal, .sollu-reveal.sollu-revealed { opacity:1 !important; transform:none !important; transition:none !important; }
+      .sollu-gallery-img { transition:none !important; }
+      .sollu-gallery-img:hover { transform:none !important; }
+      .sollu-menu-panel { animation:none !important; }
+    }
   </style>
 </helmet>
 
@@ -66,7 +86,7 @@
     </div>
 
     <!-- ABOUT -->
-    <div id="about-d" style="position:relative; padding:110px 90px; background:linear-gradient(155deg,#EFE1C4,#E7D2A6); overflow:hidden;">
+    <div id="about-d" class="sollu-reveal" style="position:relative; padding:110px 90px; background:linear-gradient(155deg,#EFE1C4,#E7D2A6); overflow:hidden;">
       <div style="position:absolute; top:-160px; right:-140px; width:520px; height:520px; border-radius:50%; background:radial-gradient(circle, rgba(174,67,30,0.16), transparent 68%);"></div>
       <div style="position:relative; z-index:2; max-width:1260px; margin:0 auto; display:flex; gap:70px; align-items:center;">
         <div style="flex:1;">
@@ -86,7 +106,7 @@
     </div>
 
     <!-- GALLERY -->
-    <div id="gallery-d" style="padding:110px 90px; background:linear-gradient(160deg,#3B2115,#2A160D);">
+    <div id="gallery-d" class="sollu-reveal" style="padding:110px 90px; background:linear-gradient(160deg,#3B2115,#2A160D);">
       <div style="max-width:1260px; margin:0 auto;">
         <div style="font-family:'Caveat',cursive; font-size:28px; color:#E5A46C;">mi trabajo</div>
         <div style="font-family:'Fraunces',serif; font-weight:600; font-size:52px; color:#F6ECDD; margin-top:6px;">Galería</div>
@@ -95,7 +115,7 @@
         <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:20px; margin-top:56px;">
           <sc-for list="{{ gallery }}" as="g" hint-placeholder-count="8">
             <div style="border-radius:14px; overflow:hidden; aspect-ratio:1; box-shadow:0 14px 30px rgba(0,0,0,0.3);">
-              <img src="{{ g.src }}" style="width:100%; height:100%; object-fit:cover;">
+              <img src="{{ g.src }}" class="sollu-gallery-img" style="width:100%; height:100%; object-fit:cover;">
             </div>
           </sc-for>
         </div>
@@ -105,7 +125,7 @@
     </div>
 
     <!-- SERVICES -->
-    <div id="services-d" style="padding:110px 90px; background:linear-gradient(155deg,#EFE1C4,#E7D2A6);">
+    <div id="services-d" class="sollu-reveal" style="padding:110px 90px; background:linear-gradient(155deg,#EFE1C4,#E7D2A6);">
       <div style="max-width:1260px; margin:0 auto;">
         <div style="font-family:'Caveat',cursive; font-size:28px; color:#AE431E;">servicios</div>
         <div style="font-family:'Fraunces',serif; font-weight:600; font-size:52px; color:#4A2110; margin-top:6px;">Cómo trabajamos juntas</div>
@@ -137,7 +157,7 @@
     </div>
 
     <!-- CONTACT -->
-    <div id="contact-d" style="padding:110px 90px; background:linear-gradient(160deg,#3B2115,#2A160D);">
+    <div id="contact-d" class="sollu-reveal" style="padding:110px 90px; background:linear-gradient(160deg,#3B2115,#2A160D);">
       <div style="max-width:1260px; margin:0 auto; display:flex; gap:70px;">
         <div style="flex:1;">
           <div style="font-family:'Caveat',cursive; font-size:28px; color:#E5A46C;">contacto</div>
@@ -203,7 +223,7 @@
       </div>
     </div>
 
-    <div id="about-m" style="padding:56px 26px; background:linear-gradient(155deg,#EFE1C4,#E7D2A6);">
+    <div id="about-m" class="sollu-reveal" style="padding:56px 26px; background:linear-gradient(155deg,#EFE1C4,#E7D2A6);">
       <div style="max-width:480px; margin:0 auto;">
         <div style="font-family:'Caveat',cursive; font-size:22px; color:#AE431E;">sobre mí</div>
         <div style="font-family:'Fraunces',serif; font-weight:600; font-size:32px; color:#4A2110; margin-top:4px; line-height:1.15;">Hola, soy Dulce —<br>detrás de Sollu</div>
@@ -219,14 +239,14 @@
       </div>
     </div>
 
-    <div id="gallery-m" style="padding:56px 26px; background:linear-gradient(160deg,#3B2115,#2A160D);">
+    <div id="gallery-m" class="sollu-reveal" style="padding:56px 26px; background:linear-gradient(160deg,#3B2115,#2A160D);">
       <div style="max-width:480px; margin:0 auto;">
         <div style="font-family:'Caveat',cursive; font-size:22px; color:#E5A46C;">mi trabajo</div>
         <div style="font-family:'Fraunces',serif; font-weight:600; font-size:32px; color:#F6ECDD; margin-top:4px;">Galería</div>
         <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:12px; margin-top:26px;">
           <sc-for list="{{ gallery }}" as="g" hint-placeholder-count="8">
             <div style="border-radius:12px; overflow:hidden; aspect-ratio:1;">
-              <img src="{{ g.src }}" style="width:100%; height:100%; object-fit:cover;">
+              <img src="{{ g.src }}" class="sollu-gallery-img" style="width:100%; height:100%; object-fit:cover;">
             </div>
           </sc-for>
         </div>
@@ -234,7 +254,7 @@
       </div>
     </div>
 
-    <div id="services-m" style="padding:56px 26px; background:linear-gradient(155deg,#EFE1C4,#E7D2A6);">
+    <div id="services-m" class="sollu-reveal" style="padding:56px 26px; background:linear-gradient(155deg,#EFE1C4,#E7D2A6);">
       <div style="max-width:480px; margin:0 auto;">
         <div style="font-family:'Caveat',cursive; font-size:22px; color:#AE431E;">servicios</div>
         <div style="font-family:'Fraunces',serif; font-weight:600; font-size:32px; color:#4A2110; margin-top:4px;">Cómo trabajamos</div>
@@ -258,7 +278,7 @@
       </div>
     </div>
 
-    <div id="contact-m" style="padding:56px 26px; background:linear-gradient(160deg,#3B2115,#2A160D);">
+    <div id="contact-m" class="sollu-reveal" style="padding:56px 26px; background:linear-gradient(160deg,#3B2115,#2A160D);">
       <div style="max-width:480px; margin:0 auto;">
         <div style="font-family:'Caveat',cursive; font-size:22px; color:#E5A46C;">contacto</div>
         <div style="font-family:'Fraunces',serif; font-weight:600; font-size:32px; color:#F6ECDD; margin-top:4px;">Agenda tu cita</div>
@@ -292,6 +312,20 @@ class Component extends DCLogic {
 
   toggleMenu = () => this.setState({ menuOpen: !this.state.menuOpen });
   closeMenu = () => this.setState({ menuOpen: false });
+
+  componentDidMount() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const els = document.querySelectorAll('.sollu-reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('sollu-revealed');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    els.forEach((el) => io.observe(el));
+  }
 
   nombreRefD = React.createRef();
   contactoRefD = React.createRef();

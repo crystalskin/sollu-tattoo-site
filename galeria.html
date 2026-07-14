@@ -14,6 +14,14 @@
     body { margin:0; background:#2A160D; }
     a { color:#AE431E; text-decoration:none; }
     a:hover { color:#E5A46C; }
+    .sollu-gallery-img { transition:transform 0.25s ease; }
+    @media (hover:hover) and (pointer:fine) {
+      .sollu-gallery-img:hover { transform:scale(1.04); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .sollu-gallery-img { transition:none !important; }
+      .sollu-gallery-img:hover { transform:none !important; }
+    }
     @media (max-width: 900px) {
       .gal-nav-inner { padding:12px 20px !important; }
       .gal-nav-logo { font-size:26px !important; }
@@ -60,7 +68,7 @@
     <div class="gal-grid" style="max-width:1260px; margin:0 auto; display:grid; grid-template-columns:repeat(4, 1fr); gap:26px;">
       <sc-for list="{{ filteredGallery }}" as="g" hint-placeholder-count="12">
         <div style="border-radius:16px; overflow:hidden; aspect-ratio:1; box-shadow:0 16px 32px rgba(0,0,0,0.3);">
-          <img src="{{ g.src }}" style="width:100%; height:100%; object-fit:cover;">
+          <img src="{{ g.src }}" class="sollu-gallery-img" style="width:100%; height:100%; object-fit:cover;">
         </div>
       </sc-for>
     </div>
